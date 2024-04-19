@@ -1,14 +1,21 @@
 import discord
+from event import Event
+from discord.ext import commands
+import sqlite3
+import random
+import asyncio
 
-class MyClient(discord.Client):
-    async def on_ready(self):
-        print(f'Logged on as {self.user}!')
-
-    async def on_message(self, message):
-        print(f'Message from {message.author}: {message.content}')
+bot = commands.Bot(command_prefix='!', intents=discord.Intents.all())
 
 intents = discord.Intents.default()
 intents.message_content = True
 
-client = MyClient(intents=intents)
-client.run('OTg3MTQ4ODMxOTk5Mjk1NDg4.GF9qCx._yoIk8w7XsCTd4Nn5z-ShCe8ylxc-qUc3QkLko')
+
+##bot.run('OTg3MTQ4ODMxOTk5Mjk1NDg4.GF9qCx._yoIk8w7XsCTd4Nn5z-ShCe8ylxc-qUc3QkLko')
+
+async def main():
+    await bot.load_extension("event")
+    await bot.load_extension("commands")
+    await bot.start('OTg3MTQ4ODMxOTk5Mjk1NDg4.GF9qCx._yoIk8w7XsCTd4Nn5z-ShCe8ylxc-qUc3QkLko')
+
+asyncio.run(main())
