@@ -16,6 +16,7 @@ intents.message_content = True
 async def main():
     await bot.load_extension("event")
     await bot.load_extension("commands")
+    await bot.load_extension("shop")
     await bot.start('OTg3MTQ4ODMxOTk5Mjk1NDg4.GF9qCx._yoIk8w7XsCTd4Nn5z-ShCe8ylxc-qUc3QkLko')
 
 asyncio.run(main())

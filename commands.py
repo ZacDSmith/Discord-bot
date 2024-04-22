@@ -33,8 +33,7 @@ class Commands(commands.Cog):
             print(e)
         finally:
             cursor.close()
-
-
+      
     @commands.command()
     async def deposit(self, ctx: commands.Context, amount: int):
         try:
@@ -133,16 +132,14 @@ class Commands(commands.Cog):
                 wallet = wallet[0]
         
             except:
-                wallet = 0
-
-            sql = ("UPDATE main SET wallet = ? WHERE user_id = ?")
-            val = (wallet + int(earnings), member.id)
+                wallet = wallet
             try:
-                cursor.execute(sql, val)
+                cursor.execute(f"UPDATE main SET wallet = {wallet + int(earnings)} WHERE user_id = {member.id}")
+                db.commit()
+                await ctx.send(f"You have earned {earnings}")
             except Exception as E:
                 print(E)
-                        
-            await ctx.send(f"You have earned {earnings}")
+
         except Exception as e:
             print(e)
         finally:
@@ -150,7 +147,7 @@ class Commands(commands.Cog):
             db.close()
 
     @commands.command()
-    async def gamble(self, ctx: commands.Context, amount:int):
+    async def gamble(self, ctx: commands.Context, amount:int=0):
         try:
             member = ctx.author
             db = sqlite3.connect("main.sqlite")
@@ -162,7 +159,9 @@ class Commands(commands.Cog):
         
             except:
                 wallet = wallet
-            
+
+            if amount <= 10:
+                return await ctx.send("Please enter a number above 10")
             if wallet < amount:
                 return await ctx.send("You don't have enough money.")
             
@@ -238,10 +237,10 @@ class Commands(commands.Cog):
                 embed.set_thumbnail(url="https://cdn-icons-png.flaticon.com/512/1055/1055823.png")
                 await ctx.send(embed=embed)
             else:
-                cursor.execute("UPDATE main SET wallet = ? WHERE user_id = ?", (wallet - earning, member.id))
+                cursor.execute("UPDATE main SET wallet = ? WHERE user_id = ?", (wallet - amount, member.id))
                 db.commit()
                 embed = discord.Embed(title=f"Slot Machine", color= discord.Color.red())
-                embed.add_field(name=f"You Lost 💸{earning}", value=f'{final}')
+                embed.add_field(name=f"You Lost 💸{amount}", value=f'{final}')
                 embed.set_thumbnail(url="https://cdn-icons-png.flaticon.com/512/1055/1055823.png")
                 await ctx.send(embed=embed)
         except Exception as e:
