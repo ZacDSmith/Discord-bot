@@ -52,25 +52,25 @@ class Commands(commands.Cog):
                 wallet = wallet
                 bank = bank
             
-            if wallet < amount:
-                return await ctx.send("pp head no worky.")
-            
-            new_wallet_amt: int = wallet - amount
-            new_bank_amt: int = bank + amount
+            if amount < 0:
+                return await ctx.send("Enter Valid Number")
+            elif wallet < amount:
+                await ctx.send ("Not enough cash")
+            elif wallet >= amount:
+                new_wallet_amt: int = wallet - amount
+                new_bank_amt: int = bank + amount
 
-            cursor.execute(f"UPDATE main SET wallet = {new_wallet_amt} WHERE user_id = {member.id}")
-            db.commit()
-            cursor.execute(f"UPDATE main SET bank = {new_bank_amt} WHERE user_id = {member.id}")
-            db.commit()
+                cursor.execute(f"UPDATE main SET wallet = {new_wallet_amt}, bank = {new_bank_amt} WHERE user_id = {member.id}")
+                db.commit()
 
-            embed = discord.Embed(color=discord.Color.random())
-            embed.set_author(icon_url=member.avatar, name=f"{member.name} Bank account")
-            embed.add_field(name="Wallet", value=f"'💸{new_wallet_amt}'")
-            embed.add_field(name="Bank", value=f"'💸{new_bank_amt}'")
-            embed.add_field(name="Networth", value=f"'💸{new_wallet_amt + new_bank_amt}'")
-            embed.set_thumbnail(url="https://cdn-icons-png.flaticon.com/512/1138/1138038.png")
-            embed.timestamp = datetime.datetime.now(datetime.timezone.utc)
-            await ctx.send(embed=embed)
+                embed = discord.Embed(color=discord.Color.random())
+                embed.set_author(icon_url=member.avatar, name=f"{member.name} Bank account")
+                embed.add_field(name="Wallet", value=f"'💸{new_wallet_amt}'")
+                embed.add_field(name="Bank", value=f"'💸{new_bank_amt}'")
+                embed.add_field(name="Networth", value=f"'💸{new_wallet_amt + new_bank_amt}'")
+                embed.set_thumbnail(url="https://cdn-icons-png.flaticon.com/512/1138/1138038.png")
+                embed.timestamp = datetime.datetime.now(datetime.timezone.utc)
+                await ctx.send(embed=embed)
         except Exception as e:
             print(e)
         finally:
@@ -78,7 +78,7 @@ class Commands(commands.Cog):
             db.close()
 
     @commands.command()
-    async def withdraw(self, ctx: commands.Context, amount: int):
+    async def withdraw(self, ctx: commands.Context, amount: int=1):
         try:
             member = ctx.author
             db = sqlite3.connect("main.sqlite")
@@ -91,26 +91,26 @@ class Commands(commands.Cog):
                 bank = bal[1]
         
             except:
-                wallet = wallet
-                bank = bank
-            
-            if bank < amount:
-                return await ctx.send("pp head no worky.")
-            
-            new_wallet_amt: int = wallet + amount
-            new_bank_amt: int = bank - amount
+                await ctx.send ("There is an error")
+            if amount < 0:
+                return await ctx.send("Enter Valid Number")
+            elif bank < amount:
+                await ctx.send ("Not enough cash")
+            elif bank >= amount:
+                new_wallet_amt: int = wallet + amount
+                new_bank_amt: int = bank - amount
 
-            cursor.execute(f"UPDATE main SET wallet = {new_wallet_amt}, bank = {new_bank_amt} WHERE user_id = {member.id}")
-            db.commit()
+                cursor.execute(f"UPDATE main SET wallet = {new_wallet_amt}, bank = {new_bank_amt} WHERE user_id = {member.id}")
+                db.commit()
 
-            embed = discord.Embed(color=discord.Color.random())
-            embed.set_author(icon_url=member.avatar, name=f"{member.name} Bank account")
-            embed.add_field(name="Wallet", value=f"'💸{new_wallet_amt}'")
-            embed.add_field(name="Bank", value=f"'💸{new_bank_amt}'")
-            embed.add_field(name="Networth", value=f"'💸{new_wallet_amt + new_bank_amt}'")
-            embed.set_thumbnail(url="https://cdn-icons-png.flaticon.com/512/1138/1138038.png")
-            embed.timestamp = datetime.datetime.now(datetime.timezone.utc)
-            await ctx.send(embed=embed)
+                embed = discord.Embed(color=discord.Color.random())
+                embed.set_author(icon_url=member.avatar, name=f"{member.name} Bank account")
+                embed.add_field(name="Wallet", value=f"'💸{new_wallet_amt}'")
+                embed.add_field(name="Bank", value=f"'💸{new_bank_amt}'")
+                embed.add_field(name="Networth", value=f"'💸{new_wallet_amt + new_bank_amt}'")
+                embed.set_thumbnail(url="https://cdn-icons-png.flaticon.com/512/1138/1138038.png")
+                embed.timestamp = datetime.datetime.now(datetime.timezone.utc)
+                await ctx.send(embed=embed)
         except Exception as e:
             print(e)
         finally:
