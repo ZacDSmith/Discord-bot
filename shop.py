@@ -184,6 +184,7 @@ class Shop(commands.Cog):
                 embed.add_field(name=f"{item[0]}  :  {item[3]} ", value=f"Desc: {item[2]}", inline=False)
             embed.set_author(icon_url=member.avatar, name=f"{member.name} Inventory")
             await ctx.send(embed=embed)
+            
         except Exception as e:
             print(e)
         finally:
