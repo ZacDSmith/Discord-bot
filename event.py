@@ -11,7 +11,7 @@ class Event(commands.Cog):
         cursor.execute('''CREATE TABLE IF NOT EXISTS main (
                        user_id INTEGER, wallet INTEGER, bank INTEGER
         )''')
-        print("Bot Is Online")
+        print("(╯°□°)╯︵ ┻━┻ ƎNI˥NO ┴OB")
 
 
     @commands.Cog.listener()
