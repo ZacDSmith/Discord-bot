@@ -3,7 +3,7 @@ event.py:
 This creates the database (user_id, wallet, bank) if there isnt one and gives a first time chatter 100 currency
 
 commands.py:
-  !bal returns wallet, bank, and networth
+  !bal returns wallet, bank, and networth \n
   !deposit allows you to deposit currency into bank from wallet
   !withdraw allows you to withdraw currency from bank to wallet
   !earn lets you earn money from a randint (1, 5)
