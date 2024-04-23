@@ -1,8 +1,6 @@
 import discord
 from event import Event
 from discord.ext import commands
-import sqlite3
-import random
 import asyncio
 
 bot = commands.Bot(command_prefix='!', intents=discord.Intents.all())

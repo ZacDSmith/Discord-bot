@@ -1,4 +1,3 @@
-import asyncio
 import discord
 from discord.ext import commands
 import sqlite3
@@ -23,9 +22,9 @@ class Commands(commands.Cog):
 
             embed = discord.Embed(color=discord.Color.random())
             embed.set_author(icon_url=member.avatar, name=f"{member.name} Bank account")
-            embed.add_field(name="Wallet", value=f"'💸{bal[0]}'")
-            embed.add_field(name="Bank", value=f"'💸{bal[1]}'")
-            embed.add_field(name="Networth", value=f"'💸{bal[0] + bal[1]}'")
+            embed.add_field(name="Wallet", value=f"💸{bal[0]}")
+            embed.add_field(name="Bank", value=f"💸{bal[1]}")
+            embed.add_field(name="Networth", value=f"💸{bal[0] + bal[1]}")
             embed.set_thumbnail(url="https://cdn-icons-png.flaticon.com/512/1138/1138038.png")
             embed.timestamp = datetime.datetime.now(datetime.timezone.utc)
             await ctx.send(embed=embed)
@@ -64,12 +63,13 @@ class Commands(commands.Cog):
 
                 embed = discord.Embed(color=discord.Color.random())
                 embed.set_author(icon_url=member.avatar, name=f"{member.name} Bank account")
-                embed.add_field(name="Wallet", value=f"'💸{new_wallet_amt}'")
-                embed.add_field(name="Bank", value=f"'💸{new_bank_amt}'")
-                embed.add_field(name="Networth", value=f"'💸{new_wallet_amt + new_bank_amt}'")
+                embed.add_field(name="Wallet", value=f"💸{new_wallet_amt}")
+                embed.add_field(name="Bank", value=f"💸{new_bank_amt}")
+                embed.add_field(name="Networth", value=f"💸{new_wallet_amt + new_bank_amt}")
                 embed.set_thumbnail(url="https://cdn-icons-png.flaticon.com/512/1138/1138038.png")
                 embed.timestamp = datetime.datetime.now(datetime.timezone.utc)
                 await ctx.send(embed=embed)
+
         except Exception as e:
             print(e)
         finally:
@@ -104,9 +104,9 @@ class Commands(commands.Cog):
 
                 embed = discord.Embed(color=discord.Color.random())
                 embed.set_author(icon_url=member.avatar, name=f"{member.name} Bank account")
-                embed.add_field(name="Wallet", value=f"'💸{new_wallet_amt}'")
-                embed.add_field(name="Bank", value=f"'💸{new_bank_amt}'")
-                embed.add_field(name="Networth", value=f"'💸{new_wallet_amt + new_bank_amt}'")
+                embed.add_field(name="Wallet", value=f"💸{new_wallet_amt}")
+                embed.add_field(name="Bank", value=f"💸{new_bank_amt}")
+                embed.add_field(name="Networth", value=f"💸{new_wallet_amt + new_bank_amt}")
                 embed.set_thumbnail(url="https://cdn-icons-png.flaticon.com/512/1138/1138038.png")
                 embed.timestamp = datetime.datetime.now(datetime.timezone.utc)
                 await ctx.send(embed=embed)
@@ -248,8 +248,6 @@ class Commands(commands.Cog):
         finally:
             cursor.close()
             db.close()
-
-
 
 async def setup(bot):
     await bot.add_cog(Commands(bot))
