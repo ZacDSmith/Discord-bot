@@ -16,6 +16,7 @@ async def main():
     await bot.load_extension("event")
     await bot.load_extension("commands")
     await bot.load_extension("shop")
+    await bot.load_extension("chatbot")
     await bot.start(token=os.environ['TOKEN'])
 
 asyncio.run(main())
