@@ -17,7 +17,7 @@ class Chatbot(commands.Cog):
         self.bot = bot
 
     @commands.command()
-    async def gpt(self, ctx: commands.Context, *, prompt:str):
+    async def chat(self, ctx: commands.Context, *, prompt:str):
         async with aiohttp.ClientSession() as session:
             payload= {
                 "model": "gpt-3.5-turbo",
