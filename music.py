@@ -31,13 +31,12 @@ class Music(commands.Cog):
             await ctx.message.delete()
             await ctx.send("https://www.youtube.com/watch?v=" + video_ids[0])
             yt = YouTube(url)
-
             stream = yt.streams.filter(only_audio=True).first()
+            vc.pause()
             vc.play(discord.FFmpegPCMAudio(executable="C:/Users/Ratfi/OneDrive/Desktop/ffmpeg-2024-04-21-git-20206e14d7-full_build/bin/ffmpeg.exe", source=f"{stream.url}", **FFMPEG_OPTIONS))
             await ctx.send('Now playing...')
         except Exception as e:
             print(e)
-
 
     @commands.command()
     async def stop(self,ctx: commands.Context):
