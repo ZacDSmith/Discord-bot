@@ -18,6 +18,7 @@ async def main():
     await bot.load_extension("shop")
     await bot.load_extension("chatbot")
     await bot.load_extension("music")
+    await bot.load_extension("imageai")
     await bot.start(token=os.environ['TOKEN'])
 
 asyncio.run(main())

@@ -3,7 +3,6 @@ from discord.ext import commands
 import aiohttp
 import os
 from dotenv import load_dotenv
-#import json
 
 """
 Add a command that lets you input a prompt and it generates a picture
@@ -31,7 +30,6 @@ class Chatbot(commands.Cog):
             headers = {"Authorization": f"Bearer {apikey}"}
             async with session.post("https://api.openai.com/v1/chat/completions", json=payload, headers=headers) as resp:
                 response = await resp.json()
-                #print(json.dumps(response,indent=4))
                 embed = discord.Embed(title="Chat GPT's Response:", description=response["choices"][0]["message"]["content"])
                 await ctx.send(embed=embed)
 
