@@ -3,7 +3,6 @@ from discord.ext import commands
 import sqlite3
 import datetime
 
-
 class Shop(commands.Cog):
     
     def __init__(self, bot) -> None:

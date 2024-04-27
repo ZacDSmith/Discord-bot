@@ -4,10 +4,6 @@ import aiohttp
 import os
 from dotenv import load_dotenv
 
-"""
-Add a command that lets you input a prompt and it generates a picture
-Add a commamd that uses image recognition for screenshots.
-"""
 load_dotenv()
 apikey=os.environ['GPT']
 
