@@ -1,10 +1,10 @@
 Discord bot with basic economy.
 
-event.py:
+event.py
 
     This creates the database (user_id, wallet, bank) if there isnt one and gives a first time chatter 100 currency
 
-commands.py:
+commands.py
 
     !bal returns wallet, bank, and networth
     !deposit {amount:int} allows you to deposit currency into bank from wallet
@@ -13,7 +13,7 @@ commands.py:
     !gamble {amount:int} allows you to gamble currency above 10
     !slots {amount:int} lets you gamble currency in the form of a slot machine
   
-shop.py:
+shop.py
 
     !additem {item:str, price:int, description:str} allows you to add an item to the DB (ADMIN ONLY)
     !removeitem {item:str} allows you to remove an item from the DB (ADMIN ONLY)
