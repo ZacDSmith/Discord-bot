@@ -9,7 +9,7 @@ commands.py
     !bal returns wallet, bank, and networth
     !deposit {amount:int} allows you to deposit currency into bank from wallet
     !withdraw {amount:int} allows you to withdraw currency from bank to wallet
-    !earn lets you earn money from a randint (1, 5)
+    !mine lets you mine currency from a randint (1, 999)
     !gamble {amount:int} allows you to gamble currency above 10
     !slots {amount:int} lets you gamble currency in the form of a slot machine
   
