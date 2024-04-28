@@ -4,7 +4,6 @@ import sqlite3
 import random
 import datetime
 
-
 class Commands(commands.Cog):
 
     def __init__(self, bot) -> None:
@@ -117,11 +116,11 @@ class Commands(commands.Cog):
             db.close()
 
     @commands.command()
-    async def earn(self,ctx):
+    async def mine(self,ctx):
         try:
             member = ctx.author
 
-            earnings = random.randint(1, 5)
+            earnings = random.randint(1, 999)
             db = sqlite3.connect("main.sqlite")
             cursor = db.cursor()
 
@@ -134,9 +133,14 @@ class Commands(commands.Cog):
             except:
                 wallet = wallet
             try:
+                new_wallet_amt: int = wallet + earnings
                 cursor.execute(f"UPDATE main SET wallet = {wallet + int(earnings)} WHERE user_id = {member.id}")
                 db.commit()
-                await ctx.send(f"You have earned {earnings}")
+                embed = discord.Embed(color=discord.Color.random())
+                embed.add_field(name="You Mined:", value=f"💸{earnings}", inline=False)
+                embed.add_field(name="New Wallet Amount:", value=f"💸{new_wallet_amt}")
+                embed.set_thumbnail(url="https://cdn.discordapp.com/attachments/1231812202533752884/1234231239708250253/mining-cart.png?ex=662ffaea&is=662ea96a&hm=faaee8da09e77565069865f0f0f0485d204333de421cc17110beeb4e862dfc10&")
+                await ctx.send(embed=embed)
             except Exception as E:
                 print(E)
 
