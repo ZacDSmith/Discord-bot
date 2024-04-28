@@ -7,7 +7,7 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-bot = commands.Bot(command_prefix='!', intents=discord.Intents.all())
+bot = commands.Bot(command_prefix='!',case_insensitive=True , intents=discord.Intents.all())
 
 intents = discord.Intents.all()
 intents.message_content = True
