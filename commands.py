@@ -170,7 +170,7 @@ class Commands(commands.Cog):
                 return await ctx.send("You don't have enough money.")
             
             user_strikes = random.randint(1, 15)
-            bot_strikes = random.randint(5, 15)
+            bot_strikes = random.randint(8, 15)
 
             """gets bots nickname based on specific server. 
             https://discordpy.readthedocs.io/en/stable/api.html#client"""
