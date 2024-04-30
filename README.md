@@ -1,5 +1,7 @@
 COMMANDS ARE NOT CASE SENSITIVE
 
+Make sure to set up a .env file with the discord Token and api key for chatgpt.
+
 event.py
 
     This creates the database (user_id, wallet, bank) if there isnt one and gives a first time chatter 100 currency
