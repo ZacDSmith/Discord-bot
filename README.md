@@ -1,6 +1,6 @@
 COMMANDS ARE NOT CASE SENSITIVE
 
-Make sure to set up a .env file with the discord Token and api key for chatgpt.
+Make sure to set up a .env file with the discord Token and api key for chatgpt. Check example.env for setup
 
 event.py
 
