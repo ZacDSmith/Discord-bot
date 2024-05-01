@@ -1,7 +1,6 @@
 from discord.ext import commands
 import sqlite3
 
-
 class Event(commands.Cog):
 
     @commands.Cog.listener()
@@ -11,7 +10,13 @@ class Event(commands.Cog):
         cursor.execute('''CREATE TABLE IF NOT EXISTS main (
                        user_id INTEGER, wallet INTEGER, bank INTEGER
         )''')
-        print("(╯°□°)╯︵ ┻━┻ ƎNI˥NO ┴OB")
+        cursor.execute('''CREATE TABLE IF NOT EXISTS items (
+                       items TEXT, price INTEGER, description TEXT, id INTEGER PRIMARY KEY
+        )''')
+        cursor.execute('''CREATE TABLE IF NOT EXISTS inv (
+                       user_id INTEGER, item TEXT, id INTEGER PRIMARY KEY, count INTEGER
+        )''')
+        print("Bot Online.")
 
 
     @commands.Cog.listener()
