@@ -12,7 +12,8 @@ Docs:
 
 event.py
 
-    This creates the database (user_id, wallet, bank) if there isnt one and gives a first time chatter 100 currency
+    This creates the database with tables, main(user_id, wallet, bank), items(name, price, description, id{primarykey}), inv(user_id, item, id{primarykey}, count)
+    When a user types in chat for the first time, they are rewarded 100 coins and a spot in the database.
 
 commands.py
 
