@@ -16,7 +16,7 @@ event.py
         main(user_id, wallet, bank), 
         items(name, price, description, id{primarykey}), 
         inv(user_id, item, id{primarykey}, count)
-    When a user types in chat for the first time, they are rewarded 100 coins and a spot in the database.
+    When a user types in chat for the first time, they are rewarded 100 currency.
 
 commands.py
 
