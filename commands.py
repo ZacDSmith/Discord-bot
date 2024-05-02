@@ -7,7 +7,7 @@ import datetime
 class Commands(commands.Cog):
 
     def __init__(self, bot) -> None:
-        self.bot = bot
+        self.bot:commands.Bot = bot
 
     @commands.command(name="bal")
     async def bal(self,ctx, member:discord.Member = None):

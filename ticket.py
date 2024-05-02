@@ -8,13 +8,6 @@ ticket system:
     button creates text channel thats only visble to button clicker and admins
     ping user in ticket channel with basic embed that says ticket has been created.
 """
-
-
-"""
-NEED THE BOT VARIABLE TO MAKE THIS WORK PROPERLY BUT IT THROWS ERROR:
-RuntimeError: asyncio.run() cannot be called from a running event loop
-tried from bot import bot
-"""
 from discord.ext import commands
 import discord
 
