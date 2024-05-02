@@ -17,9 +17,10 @@ tried from bot import bot
 """
 from discord.ext import commands
 import discord
+
 class Ticket(commands.Cog):
     def __init__(self, bot) -> None:
-        self.bot = bot
+        self.bot:commands.Bot = bot
 
     @commands.command()
     async def test(self, ctx: commands.Context):
@@ -28,9 +29,11 @@ class Ticket(commands.Cog):
             ticket_channel_create = await guild.create_text_channel('ticket-channel')
             channel = discord.utils.get(ctx.guild.channels, name=f"{ticket_channel_create}")
             channel_id = channel.id
-            ticket_channel = bot.get_channel(channel_id)
-            await ticket_channel.send("test")
+            ticket_channel = self.bot.get_channel(channel_id)
+            await ticket_channel.send("TICKET CHANNEL NERDS")
         except Exception as e:
             print(e)
+
+
 async def setup(bot):
     await bot.add_cog(Ticket(bot))
