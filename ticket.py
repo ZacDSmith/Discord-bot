@@ -12,18 +12,28 @@ from discord.ext import commands
 import discord
 
 class buttons(discord.ui.View):
- #GET SOME
+    def __init__(self, ticket_number:int): 
+        super().__init__()
+        self.ticket_number = 0
+
     @discord.ui.button(label="Open Ticket", style=discord.ButtonStyle.blurple)
     async def ticketbtn(self, interations: discord.Interaction, button: discord.ui.Button):
-        await interations.response.send_message("Ticket channel created")
-        guild = interations.guild
-        user = guild.get_member(interations.user.id)
-        ticket_channel_create = await guild.create_text_channel('Ticket🎫')
-        channel = discord.utils.get(guild.channels, name=f"{ticket_channel_create}")
-        channel_id = channel.id
-        ticket_channel = guild.get_channel(channel_id)
-        await ticket_channel.set_permissions(guild.default_role, send_messages=False, view_channel=False)
-        await ticket_channel.set_permissions(user, send_messages=True, view_channel=True)
+        try:
+            await interations.response.send_message("Ticket channel created")
+            guild = interations.guild
+            user = guild.get_member(interations.user.id)
+            number = self.ticket_number + 1
+            ticket_channel_create = await guild.create_text_channel(f'Ticket{number}')
+            channel = discord.utils.get(guild.channels, name=f"{ticket_channel_create}")
+            channel_id = channel.id
+            ticket_channel = guild.get_channel(channel_id)
+            await ticket_channel.set_permissions(guild.default_role, send_messages=False, view_channel=False)
+            await ticket_channel.set_permissions(user, send_messages=True, view_channel=True)
+            await ticket_channel.send(user.mention)
+            await ticket_channel.send("What is the problem you are having?")
+            
+        except Exception as e:
+            print(e)
 
 class Ticket(commands.Cog):
     def __init__(self, bot) -> None:
@@ -40,7 +50,7 @@ class Ticket(commands.Cog):
             ticket_channel = self.bot.get_channel(channel_id)
             await ticket_channel.set_permissions(ctx.guild.default_role, send_messages=False)
             embed = discord.Embed(title=f"TICKETS", color= discord.Color.green())
-            await ticket_channel.send(embed=embed, view=buttons())
+            await ticket_channel.send(embed=embed, view=buttons(ticket_number=0))
 
         except Exception as e:
             print(e)
