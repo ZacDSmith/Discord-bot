@@ -58,5 +58,5 @@ imageai.py
 
 ticket.py
 
-    !test sets up channel to host the embed for the ticket back
+    !test sets up channel to host the embed for the ticket.
     The ticket button opens a ticket that only the admins and user can access.
