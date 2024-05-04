@@ -9,6 +9,15 @@ class Commands(commands.Cog):
     def __init__(self, bot) -> None:
         self.bot:commands.Bot = bot
 
+    @commands.command(name='clear', help='Clears the chat')
+    async def clear(self,ctx: commands.Context, amount: int):
+        try:
+            channel = await ctx.guild.fetch_channel(ctx.channel.id)
+            await discord.channel.TextChannel.purge(channel, limit=amount)
+            await ctx.message.delete()
+        except Exception as e:
+            print(e)
+
     @commands.command(name="bal")
     async def bal(self,ctx, member:discord.Member = None):
         try:

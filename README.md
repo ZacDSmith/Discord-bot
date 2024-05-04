@@ -58,6 +58,5 @@ imageai.py
 
 ticket.py
 
-    CAUTION: Currently in testing phase.
-        !test sets up channel to host the embed for the ticket.
-        The ticket button opens a ticket that only the admins and user can access.
+    !setuptick sets up channel to host the embed for the ticket.
+    The ticket button opens a ticket that only the admins and user can access.

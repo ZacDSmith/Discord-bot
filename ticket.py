@@ -12,7 +12,7 @@ from discord.ext import commands
 import discord
 
 class buttons(discord.ui.View):
-    def __init__(self, ticket_number:int): 
+    def __init__(self): 
         super().__init__()
         self.ticket_number = 0
 
@@ -22,8 +22,8 @@ class buttons(discord.ui.View):
             await interations.response.send_message("Ticket channel created")
             guild = interations.guild
             user = guild.get_member(interations.user.id)
-            number = self.ticket_number + 1
-            ticket_channel_create = await guild.create_text_channel(f'Ticket{number}')
+            ticket_channel_create = await guild.create_text_channel(f'{user} Ticket {self.ticket_number}')
+            self.ticket_number +=1
             channel = discord.utils.get(guild.channels, name=f"{ticket_channel_create}")
             channel_id = channel.id
             ticket_channel = guild.get_channel(channel_id)
@@ -38,10 +38,9 @@ class buttons(discord.ui.View):
 class Ticket(commands.Cog):
     def __init__(self, bot) -> None:
         self.bot:commands.Bot = bot
-
     #
     @commands.command()
-    async def test(self, ctx: commands.Context, ):
+    async def setuptick(self, ctx: commands.Context):
         try:
             guild = ctx.message.guild
             ticket_channel_create = await guild.create_text_channel('🎫TICKETS🎫')
@@ -50,7 +49,8 @@ class Ticket(commands.Cog):
             ticket_channel = self.bot.get_channel(channel_id)
             await ticket_channel.set_permissions(ctx.guild.default_role, send_messages=False)
             embed = discord.Embed(title=f"TICKETS", color= discord.Color.green())
-            await ticket_channel.send(embed=embed, view=buttons(ticket_number=0))
+            await ticket_channel.send(embed=embed, view=buttons())
+
 
         except Exception as e:
             print(e)
