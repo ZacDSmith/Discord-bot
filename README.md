@@ -17,7 +17,16 @@ event.py
         items(name, price, description, id{primarykey}), 
         inv(user_id, item, id{primarykey}, count)
     When a user types in chat for the first time, they are rewarded 100 currency.
+    
 
+music.py
+
+    !play plays youtube audio by url.
+    !stop stops the audio
+    !pause pauses the audio
+    !resume resumes the audio
+
+    
 commands.py
 
     !bal returns wallet, bank, and networth
@@ -26,6 +35,7 @@ commands.py
     !mine lets you mine currency from a randint (1, 999)
     !gamble {amount:int} allows you to gamble currency above 10
     !slots {amount:int} lets you gamble currency in the form of a slot machine
+    
   
 shop.py
 
@@ -36,10 +46,17 @@ shop.py
     !sell {item:str} allows you to sell an item for currency
     !inv lets you check your inv for items you've purchased
 
+
 chatbot.py
 
     !chat {prompt:str} response to a prompt entered by the user.
+    
 
 imageai.py
 
     !image {prompt:str} generates a image using prompt entered by the user.
+
+ticket.py
+
+    !test sets up channel to host the embed for the ticket back
+    The ticket button opens a ticket that only the admins and user can access.
