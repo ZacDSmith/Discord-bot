@@ -19,7 +19,6 @@ class buttons(discord.ui.View):
     @discord.ui.button(label="Open Ticket", style=discord.ButtonStyle.blurple)
     async def ticketbtn(self, interations: discord.Interaction, button: discord.ui.Button):
         try:
-            await interations.response.send_message("Ticket channel created")
             guild = interations.guild
             user = guild.get_member(interations.user.id)
             ticket_channel_create = await guild.create_text_channel(f'{user} Ticket {self.ticket_number}')
