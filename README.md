@@ -2,12 +2,13 @@ COMMANDS ARE NOT CASE SENSITIVE
 
 Make sure to set up a .env file with the Token(Discord) and api key(Chatgpt). Check example.env for setup
 
-Docs:
+docs / download links:
 
     https://discordpy.readthedocs.io/en/stable/
     https://docs.python.org/3/library/sqlite3.html
     https://pytube.io/en/latest/index.html
     https://platform.openai.com/docs/overview
+    https://ffmpeg.org/download.html
     
 
 event.py
@@ -21,7 +22,8 @@ event.py
 
 music.py
 
-    YOU HAVE TO DOWNLOAD THE ffmpeg.exe AND CHANGE THE FILE PATH TO YOURS IN ORDER FOR THE PLAY COMMAND TO WORK >>> https://ffmpeg.org/download.html
+    YOU HAVE TO DOWNLOAD THE ffmpeg.exe AND CHANGE THE FILE PATH TO YOURS
+        check docs/download links to find the url.
     !play plays youtube audio by url.
     !stop stops the audio
     !pause pauses the audio
@@ -36,6 +38,7 @@ commands.py
     !mine lets you mine currency from a randint (1, 999)
     !gamble {amount:int} allows you to gamble currency above 10
     !slots {amount:int} lets you gamble currency in the form of a slot machine
+    !clear {amount:int} clears the given amount of chat messages
     
   
 shop.py
