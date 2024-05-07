@@ -51,6 +51,9 @@ shop.py
     !inv lets you check your inv for items you've purchased
 
 
+MAKE SURE YOU HAVE YOUR API TOKEN IN THE .ENV FILE OR THE AI COMMANDS WILL NOT WORK.
+
+
 chatbot.py
 
     !chat {prompt:str} response to a prompt entered by the user.
