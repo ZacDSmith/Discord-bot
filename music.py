@@ -30,6 +30,7 @@ class Music(commands.Cog):
             yt = YouTube(url)
             stream = yt.streams.filter(only_audio=True).first()
             vc.pause()
+            ## YOU HAVE TO DOWNLOAD THE ffmpeg.exe AND CHANGE THE FILE PATH TO YOURS.
             vc.play(discord.FFmpegPCMAudio(executable="C:/Program Files (x86)/ffmpeg-2024-04-21-git-20206e14d7-full_build/bin/ffmpeg.exe", source=f"{stream.url}", **FFMPEG_OPTIONS))
             await ctx.send('Now playing...')
         except Exception as e:

@@ -21,6 +21,7 @@ event.py
 
 music.py
 
+    YOU HAVE TO DOWNLOAD THE ffmpeg.exe AND CHANGE THE FILE PATH TO YOURS IN ORDER FOR THE PLAY COMMAND TO WORK >>> https://ffmpeg.org/download.html
     !play plays youtube audio by url.
     !stop stops the audio
     !pause pauses the audio
