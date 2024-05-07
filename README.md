@@ -38,6 +38,7 @@ commands.py
     !mine lets you mine currency from a randint (1, 999)
     !gamble {amount:int} allows you to gamble currency above 10
     !slots {amount:int} lets you gamble currency in the form of a slot machine
+    !clear {amount:int} clears the given amount of chat messages
     
   
 shop.py
