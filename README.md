@@ -2,7 +2,7 @@ COMMANDS ARE NOT CASE SENSITIVE
 
 Make sure to set up a .env file with the Token(Discord) and api key(Chatgpt). Check example.env for setup
 
-Docs/ Download links:
+docs / download links:
 
     https://discordpy.readthedocs.io/en/stable/
     https://docs.python.org/3/library/sqlite3.html
@@ -23,6 +23,7 @@ event.py
 music.py
 
     YOU HAVE TO DOWNLOAD THE ffmpeg.exe AND CHANGE THE FILE PATH TO YOURS
+        check docs/download links to find the url.
     !play plays youtube audio by url.
     !stop stops the audio
     !pause pauses the audio
