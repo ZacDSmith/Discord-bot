@@ -182,8 +182,8 @@ class Commands(commands.Cog):
 
             """gets bots nickname based on specific server. 
             https://discordpy.readthedocs.io/en/stable/api.html#client"""
-            guild = await self.bot.fetch_guild(1038514358390632489)
-            bot_member = await guild.fetch_member(987148831999295488)
+            guild = await self.bot.fetch_guild(ctx.message.guild.id)
+            bot_member = await guild.fetch_member(self.bot.user.id)
 
 
             if user_strikes > bot_strikes:
