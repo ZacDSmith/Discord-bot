@@ -12,7 +12,7 @@ class ImageGen(commands.Cog):
     def __init__(self, bot) -> None:
         self.bot = bot
 
-    @commands.command()
+    @commands.command(name="image", help="Generates image with ai based on entered prompt")
     async def image(self,ctx:commands.Context, *, prompt:str):
         try:
             async with aiohttp.ClientSession() as session:

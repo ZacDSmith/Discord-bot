@@ -5,7 +5,6 @@ import random
 import datetime
 
 class Commands(commands.Cog):
-
     def __init__(self, bot) -> None:
         self.bot:commands.Bot = bot
 
@@ -18,7 +17,7 @@ class Commands(commands.Cog):
         except Exception as e:
             print(e)
 
-    @commands.command(name="bal")
+    @commands.command(name="bal", help="Shows currency balance")
     async def bal(self,ctx, member:discord.Member = None):
         try:
             if member is None:
@@ -41,7 +40,7 @@ class Commands(commands.Cog):
         finally:
             cursor.close()
       
-    @commands.command()
+    @commands.command(name="deposit", help="Deposit currency into bank")
     async def deposit(self, ctx: commands.Context, amount: int):
         try:
             member = ctx.author
@@ -84,7 +83,7 @@ class Commands(commands.Cog):
             cursor.close()
             db.close()
 
-    @commands.command()
+    @commands.command(name="withdraw", help="Withdraw currency from bank")
     async def withdraw(self, ctx: commands.Context, amount: int=1):
         try:
             member = ctx.author
@@ -124,7 +123,7 @@ class Commands(commands.Cog):
             cursor.close()
             db.close()
 
-    @commands.command()
+    @commands.command(name="mine", help="Generates currency from the deep dark mines below where the secrets are secret and the dark is darker.")
     async def mine(self,ctx):
         try:
             member = ctx.author
@@ -159,7 +158,7 @@ class Commands(commands.Cog):
             cursor.close()
             db.close()
 
-    @commands.command()
+    @commands.command(name="gamble", help="Gambles user entered amount of currency")
     async def gamble(self, ctx: commands.Context, amount:int=0):
         try:
             member = ctx.author
@@ -215,7 +214,7 @@ class Commands(commands.Cog):
             cursor.close()
             db.close()
 
-    @commands.command()
+    @commands.command(name="slots", help="Slot machine gambling for user entered amount")
     async def slots(self, ctx, amount:int=10):
         try:
             member = ctx.author

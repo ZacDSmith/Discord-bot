@@ -38,7 +38,7 @@ class Ticket(commands.Cog):
     def __init__(self, bot) -> None:
         self.bot:commands.Bot = bot
     #
-    @commands.command()
+    @commands.command(name="setuptick", help="Sets up the channel that holds the embed for tickets")
     async def setuptick(self, ctx: commands.Context):
         try:
             guild = ctx.message.guild
