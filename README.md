@@ -17,14 +17,14 @@ event.py
         main(user_id, wallet, bank), 
         items(name, price, description, id{primarykey}), 
         inv(user_id, item, id{primarykey}, count)
-    When a user types in chat for the first time, they are rewarded 100 currency.
+    When a user types in chat for the first time, they are rewarded 100 currency
     
 
 music.py
 
     YOU HAVE TO DOWNLOAD THE ffmpeg.exe AND CHANGE THE FILE PATH TO YOURS
-        check docs/download links to find the url.
-    !play plays youtube audio by url.
+        check docs/download links to find the url
+    !play plays youtube audio by url
     !stop stops the audio
     !pause pauses the audio
     !resume resumes the audio
@@ -56,14 +56,14 @@ MAKE SURE YOU HAVE YOUR API TOKEN IN THE .ENV FILE OR THE AI COMMANDS WILL NOT W
 
 chatbot.py
 
-    !chat {prompt:str} response to a prompt entered by the user.
-    
+    !chat {prompt:str} response to a prompt entered by the user
+
 
 imageai.py
 
-    !image {prompt:str} generates a image using prompt entered by the user.
+    !image {prompt:str} generates a image using prompt entered by the user
 
 ticket.py
 
-    !setuptick sets up channel to host the embed for the ticket.
-    The ticket button opens a ticket that only the admins and user can access.
+    !setuptick sets up channel to host the embed for the ticket
+    The ticket button opens a ticket that only the admins and user can access
