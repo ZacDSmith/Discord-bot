@@ -13,7 +13,7 @@ class Music(commands.Cog):
         self.voice_client = None
         self.is_playing = False
 
-    @commands.command()
+    @commands.command(name="play", help="plays youtube audio by url")
     async def play(self,ctx:commands.Context, url: str):
         try:    
             voice_channel = ctx.author.voice.channel 
@@ -36,7 +36,7 @@ class Music(commands.Cog):
         except Exception as e:
             print(e)
 
-    @commands.command()
+    @commands.command(name="stop", help="stops the audio")
     async def stop(self,ctx: commands.Context):
         try:
             await ctx.voice_client.disconnect()
@@ -45,14 +45,14 @@ class Music(commands.Cog):
         except Exception as e:
              print(e)    
 
-    @commands.command()
+    @commands.command(name="pause", help="pauses the audio")
     async def pause(self,ctx: commands.Context):
         self.voice_client.pause()
         await ctx.message.delete()
         await ctx.send('Paused...')
         self.is_playing = False
 
-    @commands.command()
+    @commands.command(name="resume", help="resumes the audio")
     async def resume(self, ctx):
         await ctx.message.delete()
         self.voice_client.resume()

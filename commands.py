@@ -8,7 +8,7 @@ class Commands(commands.Cog):
     def __init__(self, bot) -> None:
         self.bot:commands.Bot = bot
 
-    @commands.command(name='clear', help='Clears the chat')
+    @commands.command(name='clear', help='Clears the given amount of chat messages')
     async def clear(self,ctx: commands.Context, amount: int):
         try:
             channel = await ctx.guild.fetch_channel(ctx.channel.id)
@@ -17,7 +17,7 @@ class Commands(commands.Cog):
         except Exception as e:
             print(e)
 
-    @commands.command(name="bal", help="Shows currency balance")
+    @commands.command(name="bal", help="Returns wallet, bank, and networth")
     async def bal(self,ctx, member:discord.Member = None):
         try:
             if member is None:
@@ -40,7 +40,7 @@ class Commands(commands.Cog):
         finally:
             cursor.close()
       
-    @commands.command(name="deposit", help="Deposit currency into bank")
+    @commands.command(name="deposit", help="Allows you to deposit currency into bank from wallet")
     async def deposit(self, ctx: commands.Context, amount: int):
         try:
             member = ctx.author
@@ -83,7 +83,7 @@ class Commands(commands.Cog):
             cursor.close()
             db.close()
 
-    @commands.command(name="withdraw", help="Withdraw currency from bank")
+    @commands.command(name="withdraw", help="Allows you to withdraw currency from bank to wallet")
     async def withdraw(self, ctx: commands.Context, amount: int=1):
         try:
             member = ctx.author
@@ -158,7 +158,7 @@ class Commands(commands.Cog):
             cursor.close()
             db.close()
 
-    @commands.command(name="gamble", help="Gambles user entered amount of currency")
+    @commands.command(name="gamble", help="Allows you to gamble currency above 10")
     async def gamble(self, ctx: commands.Context, amount:int=0):
         try:
             member = ctx.author
@@ -214,7 +214,7 @@ class Commands(commands.Cog):
             cursor.close()
             db.close()
 
-    @commands.command(name="slots", help="Slot machine gambling for user entered amount")
+    @commands.command(name="slots", help="Gamble currency in the form of a slot machine")
     async def slots(self, ctx, amount:int=10):
         try:
             member = ctx.author

@@ -8,7 +8,7 @@ class Shop(commands.Cog):
     def __init__(self, bot) -> None:
         self.bot = bot
 
-    @commands.command()
+    @commands.command(name="additem", help="Add an item to the DB (ADMIN ONLY)")
     @commands.has_permissions(administrator=True)
     async def additem(self, ctx: commands.Context, name:str, price:int, *, decscription: str):
         try:
@@ -27,7 +27,7 @@ class Shop(commands.Cog):
             cursor.close()
             db.close()
 
-    @commands.command()
+    @commands.command(name="removeitem", help="Remove an item from the DB (ADMIN ONLY)")
     @commands.has_permissions(administrator=True)
     async def removeitem(self, ctx: commands.Context, name:str):
         try:
@@ -46,7 +46,7 @@ class Shop(commands.Cog):
             cursor.close()
             db.close()
 
-    @commands.command()
+    @commands.command(name="shop", help="Displays items in the DB with name, price, descrip")
     async def shop(self, ctx: commands.Context):
         try:
             db = sqlite3.connect("main.sqlite")
@@ -65,7 +65,7 @@ class Shop(commands.Cog):
             cursor.close()
             db.close()
 
-    @commands.command()
+    @commands.command(name="buy", help="Buy an item from the shop")
     async def buy(self, ctx: commands.Context, name):
         try:
             member = ctx.author
@@ -121,7 +121,7 @@ class Shop(commands.Cog):
             cursor.close()
             db.close()
             
-    @commands.command()
+    @commands.command(name="sell", help="Sell an item for currency")
     async def sell(self, ctx: commands.Context, name):
         try:
             member = ctx.author
@@ -169,7 +169,7 @@ class Shop(commands.Cog):
             cursor.close()
             db.close()
             
-    @commands.command()
+    @commands.command(name="inv", help="Check your inv for items you've purchased")
     async def inv(self, ctx: commands.Context):
         try:
             member = ctx.author

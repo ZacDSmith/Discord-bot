@@ -12,7 +12,7 @@ class Chatbot(commands.Cog):
     def __init__(self, bot) -> None:
         self.bot = bot
 
-    @commands.command()
+    @commands.command(name="chat", help="Responds to a prompt entered by the user.")
     async def chat(self, ctx: commands.Context, *, prompt:str):
         try:
             async with aiohttp.ClientSession() as session:
