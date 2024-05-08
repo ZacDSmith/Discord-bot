@@ -123,7 +123,7 @@ class Commands(commands.Cog):
             cursor.close()
             db.close()
 
-    @commands.command(name="mine", help="Generates currency from the deep dark mines below where the secrets are secret and the dark is darker.")
+    @commands.command(name="mine", help="Back to the mines we go fellas")
     async def mine(self,ctx):
         try:
             member = ctx.author
