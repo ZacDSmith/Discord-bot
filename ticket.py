@@ -16,7 +16,7 @@ class buttons(discord.ui.View):
         super().__init__()
         self.ticket_number = 0
 
-    @discord.ui.button(label="Open Ticket", style=discord.ButtonStyle.blurple)
+    @discord.ui.button(label="🎫Open Ticket", style=discord.ButtonStyle.blurple)
     async def ticketbtn(self, interations: discord.Interaction, button: discord.ui.Button):
         try:
             guild = interations.guild
@@ -42,12 +42,15 @@ class Ticket(commands.Cog):
     async def setuptick(self, ctx: commands.Context):
         try:
             guild = ctx.message.guild
-            ticket_channel_create = await guild.create_text_channel('🎫TICKETS🎫')
+            ticket_channel_create = await guild.create_text_channel('child support')
             channel = discord.utils.get(ctx.guild.channels, name=f"{ticket_channel_create}")
             channel_id = channel.id
             ticket_channel = self.bot.get_channel(channel_id)
             await ticket_channel.set_permissions(ctx.guild.default_role, send_messages=False)
-            embed = discord.Embed(title=f"TICKETS", color= discord.Color.green())
+            embed = discord.Embed(title=f"Ticket", color= discord.Color.green())
+            embed.add_field(name="", value="Click below to create a ticket 🎫")
+            embed.add_field(name="", value="No Bob, we can't help you get your son back...", inline=False)
+            embed.set_thumbnail(url="https://cdn.discordapp.com/attachments/1234231427277656165/1237957709723336837/tickets.png?ex=663d8976&is=663c37f6&hm=3828a32c688a7c5d3ade4b43b9180bc7b8547428638368424c8375ffba408cb4&")
             await ticket_channel.send(embed=embed, view=buttons())
 
 

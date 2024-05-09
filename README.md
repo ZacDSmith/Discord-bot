@@ -67,3 +67,7 @@ ticket.py
 
     !setuptick sets up channel to host the embed for the ticket
     The ticket button opens a ticket that only the admins and user can access
+
+
+Feel free to contact me on discord if you have any questions.
+    @ cottoncandydaddy
