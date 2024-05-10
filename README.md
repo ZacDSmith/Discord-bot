@@ -69,5 +69,5 @@ ticket.py
     The ticket button opens a ticket that only the admins and user can access
 
 
-Feel free to contact me on discord if you have any questions.
+Feel free to contact me on discord if you have any questions or issues.
     @ cottoncandydaddy
