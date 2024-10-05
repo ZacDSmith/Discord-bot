@@ -1,11 +1,12 @@
 import urllib.request
 import discord
 from discord.ext import commands
-from pytube import YouTube
+from pytubefix import YouTube
 import urllib
+from pytubefix import cipher
 import re
-from pytube import cipher
-import re
+import ffmpeg
+
 
 def get_throttling_function_name(js: str) -> str:
     """Extract the name of the function that computes the throttling parameter.
@@ -28,12 +29,12 @@ def get_throttling_function_name(js: str) -> str:
         r'\([a-z]\s*=\s*([a-zA-Z0-9$]+)(\[\d+\])?\([a-z]\)',
         r'\([a-z]\s*=\s*([a-zA-Z0-9$]+)(\[\d+\])\([a-z]\)',
     ]
-    #logger.debug('Finding throttling function name')
+    # logger.debug('Finding throttling function name')
     for pattern in function_patterns:
         regex = re.compile(pattern)
         function_match = regex.search(js)
         if function_match:
-            #logger.debug("finished regex search, matched: %s", pattern)
+            # logger.debug("finished regex search, matched: %s", pattern)
             if len(function_match.groups()) == 1:
                 return function_match.group(1)
             idx = function_match.group(2)
@@ -53,10 +54,13 @@ def get_throttling_function_name(js: str) -> str:
         caller="get_throttling_function_name", pattern="multiple"
     )
 
+
 cipher.get_throttling_function_name = get_throttling_function_name
 
 FFMPEG_OPTIONS = {'before_options': '-reconnect 1 -reconnect_streamed 1 -reconnect_delay_max 5', 'options': '-vn'}
 client = discord.Client(intents=discord.Intents.all())
+
+
 class Music(commands.Cog):
     def __init__(self, bot) -> None:
         self.bot = bot
@@ -65,8 +69,8 @@ class Music(commands.Cog):
 
     @commands.command(name="play", help="plays youtube audio by url")
     async def play(self, ctx: commands.Context, url: str):
-        try:    
-            voice_channel = ctx.author.voice.channel 
+        try:
+            voice_channel = ctx.author.voice.channel
             if self.is_playing:
                 vc = self.voice_client
             else:
@@ -81,22 +85,24 @@ class Music(commands.Cog):
             stream = yt.streams.filter(only_audio=True).first()
             vc.pause()
             ## YOU HAVE TO DOWNLOAD THE ffmpeg.exe AND CHANGE THE FILE PATH TO YOURS.
-            vc.play(discord.FFmpegPCMAudio(executable="C:/Program Files (x86)/ffmpeg-2024-04-21-git-20206e14d7-full_build/bin/ffmpeg.exe", source=f"{stream.url}", **FFMPEG_OPTIONS))
+            vc.play(discord.FFmpegPCMAudio(
+                executable="C:/Program Files (x86)/ffmpeg-2024-04-21-git-20206e14d7-full_build/bin/ffmpeg.exe",
+                source=f"{stream.url}", **FFMPEG_OPTIONS))
             await ctx.send('Now playing...')
         except Exception as e:
             print(e)
 
     @commands.command(name="stop", help="stops the audio")
-    async def stop(self,ctx: commands.Context):
+    async def stop(self, ctx: commands.Context):
         try:
             await ctx.voice_client.disconnect()
             await ctx.send('Stopped...')
             self.is_playing = False
         except Exception as e:
-             print(e)    
+            print(e)
 
     @commands.command(name="pause", help="pauses the audio")
-    async def pause(self,ctx: commands.Context):
+    async def pause(self, ctx: commands.Context):
         self.voice_client.pause()
         await ctx.message.delete()
         await ctx.send('Paused...')
@@ -108,6 +114,7 @@ class Music(commands.Cog):
         self.voice_client.resume()
         await ctx.send('Resumed...')
         self.is_playing = True
+
 
 async def setup(bot):
     await bot.add_cog(Music(bot))

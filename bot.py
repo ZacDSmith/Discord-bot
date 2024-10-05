@@ -7,10 +7,16 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-bot = commands.Bot(command_prefix='!', case_insensitive=True, intents=discord.Intents.all())
-
 intents = discord.Intents.all()
 intents.message_content = True
+intents.guilds = True
+intents.members = True
+
+bot = commands.Bot(command_prefix='!', case_insensitive=True, intents=intents)
+
+
+
+
 
 async def main():
     await bot.load_extension("event")
@@ -19,7 +25,8 @@ async def main():
     await bot.load_extension("chatbot")
     await bot.load_extension("music")
     await bot.load_extension("imageai")
-    await bot.load_extension("ticket")
+    ##await bot.load_extension("ticket")
     await bot.start(token=os.environ['TOKEN'])
+
 
 asyncio.run(main())
