@@ -3,14 +3,15 @@ from discord.ext import commands
 import sqlite3
 import datetime
 
+
 class Shop(commands.Cog):
-    
+
     def __init__(self, bot) -> None:
         self.bot = bot
 
     @commands.command(name="additem", help="Add an item to the DB (ADMIN ONLY)")
     @commands.has_permissions(administrator=True)
-    async def additem(self, ctx: commands.Context, name:str, price:int, *, decscription: str):
+    async def additem(self, ctx: commands.Context, name: str, price: int, *, decscription: str):
         try:
             db = sqlite3.connect("main.sqlite")
             cursor = db.cursor()
@@ -29,7 +30,7 @@ class Shop(commands.Cog):
 
     @commands.command(name="removeitem", help="Remove an item from the DB (ADMIN ONLY)")
     @commands.has_permissions(administrator=True)
-    async def removeitem(self, ctx: commands.Context, name:str):
+    async def removeitem(self, ctx: commands.Context, name: str):
         try:
             db = sqlite3.connect("main.sqlite")
             cursor = db.cursor()
@@ -57,7 +58,7 @@ class Shop(commands.Cog):
             embed = discord.Embed(color=discord.Color.random())
             for item in items:
                 embed.add_field(name=item[0], value=f"{item[2]}\n💸{item[1]}", inline=False)
-                
+
             await ctx.send(embed=embed)
         except Exception as e:
             print(e)
@@ -75,7 +76,7 @@ class Shop(commands.Cog):
             wallet = cursor.fetchone()
             try:
                 wallet = wallet[0]
-        
+
             except:
                 wallet = 0
 
@@ -87,26 +88,27 @@ class Shop(commands.Cog):
                 embed.add_field(name=f"**Item doesn't exist**", value="")
                 await ctx.send(embed=embed)
                 return
-            cursor.execute(f"SELECT count FROM inv WHERE user_id = ? AND item = ?" , (member.id, name))
+            cursor.execute(f"SELECT count FROM inv WHERE user_id = ? AND item = ?", (member.id, name))
             count: tuple = cursor.fetchall()
-            if len(count) == 0:    
-                cursor.execute("INSERT INTO inv(user_id, item, count) Values(?,?,?)",(member.id, name, 1))
+            if len(count) == 0:
+                cursor.execute("INSERT INTO inv(user_id, item, count) Values(?,?,?)", (member.id, name, 1))
             else:
-                cursor.execute("UPDATE inv SET count = ? WHERE user_id = ? AND item = ?",(count[0][0] + 1, member.id, name))
-            cursor.execute(f"SELECT items.price, items.name, inv.item FROM items, inv WHERE user_id = {member.id} AND inv.item = items.name")
+                cursor.execute("UPDATE inv SET count = ? WHERE user_id = ? AND item = ?",
+                               (count[0][0] + 1, member.id, name))
+            cursor.execute(
+                f"SELECT items.price, items.name, inv.item FROM items, inv WHERE user_id = {member.id} AND inv.item = items.name")
             purchase = cursor.fetchall()
             try:
                 price = purchase[0]
             except:
                 price = price
 
-
             if wallet < price[0]:
-                await ctx.send ("Not enough cash")
+                await ctx.send("Not enough cash")
                 return
             elif wallet >= price[0]:
                 new_wallet_amt: int = wallet - price[0]
-            cursor.execute(f"UPDATE main SET wallet = {new_wallet_amt} WHERE user_id = {member.id}") 
+            cursor.execute(f"UPDATE main SET wallet = {new_wallet_amt} WHERE user_id = {member.id}")
             db.commit()
 
             embed = discord.Embed(color=discord.Color.random())
@@ -114,13 +116,13 @@ class Shop(commands.Cog):
             embed.add_field(name="Wallet", value=f"'💸{new_wallet_amt}'")
             embed.timestamp = datetime.datetime.now(datetime.timezone.utc)
             await ctx.send(embed=embed)
-            
+
         except Exception as e:
             print(e)
         finally:
             cursor.close()
             db.close()
-            
+
     @commands.command(name="sell", help="Sell an item for currency")
     async def sell(self, ctx: commands.Context, name):
         try:
@@ -131,16 +133,17 @@ class Shop(commands.Cog):
             wallet = cursor.fetchone()
             try:
                 wallet = wallet[0]
-        
+
             except:
                 wallet = 0
 
-            cursor.execute(f"SELECT count FROM inv WHERE user_id = ? AND item = ?" , (member.id, name))
+            cursor.execute(f"SELECT count FROM inv WHERE user_id = ? AND item = ?", (member.id, name))
             count: tuple = cursor.fetchone()[0]
             if not count > 0:
                 return
-            cursor.execute("UPDATE inv SET count = ? WHERE user_id = ? AND item = ?",(count - 1, member.id, name))
-            cursor.execute(f"SELECT items.price, items.name, inv.item FROM items, inv WHERE user_id = {member.id} AND inv.item = items.name")
+            cursor.execute("UPDATE inv SET count = ? WHERE user_id = ? AND item = ?", (count - 1, member.id, name))
+            cursor.execute(
+                f"SELECT items.price, items.name, inv.item FROM items, inv WHERE user_id = {member.id} AND inv.item = items.name")
             sold = cursor.fetchall()
             try:
                 price = sold[0]
@@ -148,13 +151,12 @@ class Shop(commands.Cog):
             except:
                 price = price
 
-
             if wallet < price[0]:
-                await ctx.send ("Not enough cash")
+                await ctx.send("Not enough cash")
                 return
             elif wallet >= price[0]:
                 new_wallet_amt: int = wallet + price[0]
-            cursor.execute(f"UPDATE main SET wallet = {new_wallet_amt} WHERE user_id = {member.id}") 
+            cursor.execute(f"UPDATE main SET wallet = {new_wallet_amt} WHERE user_id = {member.id}")
             db.commit()
 
             embed = discord.Embed(color=discord.Color.red())
@@ -162,13 +164,13 @@ class Shop(commands.Cog):
             embed.add_field(name="Wallet", value=f"'💸{new_wallet_amt}'")
             embed.timestamp = datetime.datetime.now(datetime.timezone.utc)
             await ctx.send(embed=embed)
-            
+
         except Exception as e:
             print(e)
         finally:
             cursor.close()
             db.close()
-            
+
     @commands.command(name="inv", help="Check your inv for items you've purchased")
     async def inv(self, ctx: commands.Context):
         try:
@@ -183,12 +185,13 @@ class Shop(commands.Cog):
                 embed.add_field(name=f"{item[0]}  :  {item[3]} ", value=f"Desc: {item[2]}", inline=False)
             embed.set_author(icon_url=member.avatar, name=f"{member.name} Inventory")
             await ctx.send(embed=embed)
-            
+
         except Exception as e:
             print(e)
         finally:
             cursor.close()
             db.close()
+
 
 async def setup(bot):
     await bot.add_cog(Shop(bot))
