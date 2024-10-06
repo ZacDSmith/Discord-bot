@@ -5,7 +5,6 @@ from pytubefix import YouTube
 import urllib
 from pytubefix import cipher
 import re
-import ffmpeg
 
 
 def get_throttling_function_name(js: str) -> str:

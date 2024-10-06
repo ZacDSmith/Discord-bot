@@ -12,16 +12,16 @@ from discord.ext import commands
 import discord
 
 
-class buttons(discord.ui.View):
+class Buttons(discord.ui.View):
     def __init__(self):
         super().__init__()
         self.ticket_number = 0
 
     @discord.ui.button(label="🎫Open Ticket", style=discord.ButtonStyle.blurple)
-    async def ticketbtn(self, interactions: discord.Interaction):
-        await discord.InteractionResponse.defer()
+    async def ticketbtn(self, interactions: discord.Interaction, button: discord.ui.Button):
         try:
-            await interactions.followup.send("Operation complete!")
+            await button.interaction_check(interactions)
+            await interactions.response.defer()
             guild = interactions.guild
             user = guild.get_member(interactions.user.id)
             ticket_channel_create = await guild.create_text_channel(f'{user} Ticket {self.ticket_number}')
@@ -33,11 +33,12 @@ class buttons(discord.ui.View):
             await ticket_channel.set_permissions(user, send_messages=True, view_channel=True)
             await ticket_channel.send(user.mention)
             await ticket_channel.send("What is the problem you are having?")
-            await interactions.followup.send(f"Your ticket has been created: {ticket_channel.mention}", ephemeral=True)
+            await user.send(f"Your ticket has been created: {ticket_channel.mention}")
 
         except Exception as e:
             print(e)
-            await interactions.followup.send("An error occurred while creating the ticket. Please try again.", ephemeral=True)
+            await interactions.user.send("An error occurred while creating the ticket. Please try again.")
+
 
 class Ticket(commands.Cog):
     def __init__(self, bot) -> None:
@@ -53,13 +54,15 @@ class Ticket(commands.Cog):
             channel_id = channel.id
             ticket_channel = self.bot.get_channel(channel_id)
             await ticket_channel.set_permissions(ctx.guild.default_role, send_messages=False)
+
             embed = discord.Embed(title=f"Ticket", color=discord.Color.green())
             embed.add_field(name="", value="Click below to create a ticket 🎫")
             embed.add_field(name="", value="No Bob, we can't help you get your son back...", inline=False)
             embed.set_thumbnail(
-                url="https://cdn.discordapp.com/attachments/1234231427277656165/1237957709723336837/tickets.png?ex=663d8976&is=663c37f6&hm=3828a32c688a7c5d3ade4b43b9180bc7b8547428638368424c8375ffba408cb4&")
-            await ticket_channel.send(embed=embed, view=buttons())
-
+                url="https://cdn.discordapp.com/attachments/1234231427277656165/"
+                    + "1237957709723336837/tickets.png?ex=663d8976&is=663c37f6&hm=3828a32c688a7c5d3ade4b"
+                    + "43b9180bc7b8547428638368424c8375ffba408cb4&")
+            await ticket_channel.send(embed=embed, view=Buttons())
 
         except Exception as e:
             print(e)

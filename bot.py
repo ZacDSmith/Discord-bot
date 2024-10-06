@@ -15,9 +15,6 @@ intents.members = True
 bot = commands.Bot(command_prefix='!', case_insensitive=True, intents=intents)
 
 
-
-
-
 async def main():
     await bot.load_extension("event")
     await bot.load_extension("commands")
@@ -25,7 +22,7 @@ async def main():
     await bot.load_extension("chatbot")
     await bot.load_extension("music")
     await bot.load_extension("imageai")
-    ##await bot.load_extension("ticket")
+    await bot.load_extension("ticket")
     await bot.start(token=os.environ['TOKEN'])
 
 
