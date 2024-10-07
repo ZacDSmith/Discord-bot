@@ -22,10 +22,10 @@ class Buttons(discord.ui.View):
         try:
             await button.interaction_check(interactions)
             await interactions.response.defer()
+            self.ticket_number += 1
             guild = interactions.guild
             user = guild.get_member(interactions.user.id)
             ticket_channel_create = await guild.create_text_channel(f'{user} Ticket {self.ticket_number}')
-            self.ticket_number += 1
             channel = discord.utils.get(guild.channels, name=f"{ticket_channel_create}")
             channel_id = channel.id
             ticket_channel = guild.get_channel(channel_id)
