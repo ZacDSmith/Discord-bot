@@ -1,6 +1,7 @@
 COMMANDS ARE NOT CASE SENSITIVE
 
 Make sure to set up a .env file with the Token(Discord) and api key(Chatgpt). Check example.env for setup
+Pytube breaks sometimes, be very aware of that if you decide to use this. Youtube updates the Regex all the time
 
 docs / download links:
 
