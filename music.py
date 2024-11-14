@@ -43,17 +43,22 @@ class Music(commands.Cog):
 
     @commands.command(name="download", help="Downloads MP3 from youtube")
     async def download(self, ctx: commands.Context, url: str):
-        await ctx.message.delete()
-        yt = YouTube(url)
-        stream = yt.streams.filter(only_audio=True).first()
-        destination = '.'
-        out_file = stream.download(output_path = destination)
-        base, ext = os.path.splitext(out_file)
-        new_file = base + '.mp3'
-        os.rename(out_file, new_file)
-        file = File(new_file)
-        await ctx.send(file=file)
-        os.remove(new_file)
+        try:
+            await ctx.message.delete()
+            yt = YouTube(url)
+            stream = yt.streams.filter(only_audio=True).first()
+            destination = '.'
+            out_file = stream.download(output_path=destination)
+            base, ext = os.path.splitext(out_file)
+            new_file = base + '.mp3'
+            os.rename(out_file, new_file)
+            file = File(new_file)
+            await ctx.send(file=file)
+            os.remove(new_file)
+        except Exception as e:
+            os.remove(new_file)
+            await ctx.send("Error! Deleting System 32 now.")
+            print(e)
 
     @commands.command(name="stop", help="stops the audio")
     async def stop(self, ctx: commands.Context):
