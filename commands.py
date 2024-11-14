@@ -147,7 +147,7 @@ class Commands(commands.Cog):
                 embed = discord.Embed(color=discord.Color.random())
                 embed.add_field(name="You Mined:", value=f"💸{earnings}", inline=False)
                 embed.add_field(name="New Wallet Amount:", value=f"💸{new_wallet_amt}")
-                embed.set_thumbnail(url="https://cdn.discordapp.com/attachments/1231812202533752884/1234231239708250253/mining-cart.png?ex=662ffaea&is=662ea96a&hm=faaee8da09e77565069865f0f0f0485d204333de421cc17110beeb4e862dfc10&")
+                embed.set_thumbnail(url="https://cdn.discordapp.com/attachments/1234231427277656165/1295885564637216768/pickaxe.png?ex=671046fa&is=670ef57a&hm=a100b6a3d60ea4f0e8637f18391eef03bd26cfba554f983c4244c5249807eb72&")
                 await ctx.send(embed=embed)
             except Exception as E:
                 print(E)

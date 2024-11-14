@@ -1,9 +1,11 @@
+import os.path
 import urllib.request
 import discord
 from discord.ext import commands
 from pytubefix import YouTube
 import urllib
 import re
+from discord import File
 
 FFMPEG_OPTIONS = {'before_options': '-reconnect 1 -reconnect_streamed 1 -reconnect_delay_max 5', 'options': '-vn'}
 
@@ -38,6 +40,20 @@ class Music(commands.Cog):
             await ctx.send('Now playing...')
         except Exception as e:
             print(e)
+
+    @commands.command(name="download", help="Downloads MP3 from youtube")
+    async def download(self, ctx: commands.Context, url: str):
+        await ctx.message.delete()
+        yt = YouTube(url)
+        stream = yt.streams.filter(only_audio=True).first()
+        destination = '.'
+        out_file = stream.download(output_path = destination)
+        base, ext = os.path.splitext(out_file)
+        new_file = base + '.mp3'
+        os.rename(out_file, new_file)
+        file = File(new_file)
+        await ctx.send(file=file)
+        os.remove(new_file)
 
     @commands.command(name="stop", help="stops the audio")
     async def stop(self, ctx: commands.Context):
