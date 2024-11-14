@@ -26,6 +26,7 @@ music.py
     YOU HAVE TO DOWNLOAD THE ffmpeg.exe AND CHANGE THE FILE PATH TO YOURS
         check docs/download links to find the url
     !play plays youtube audio by url
+    !download downloads the youtube video as mp3
     !stop stops the audio
     !pause pauses the audio
     !resume resumes the audio
