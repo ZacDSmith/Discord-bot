@@ -47,7 +47,7 @@ class Shop(commands.Cog):
             cursor.close()
             db.close()
 
-    @commands.command(name="shop", help="Displays items in the DB with name, price, descrip")
+    @commands.command(name="shop", help="Displays items in the DB with name, price, description")
     async def shop(self, ctx: commands.Context):
         try:
             db = sqlite3.connect("main.sqlite")

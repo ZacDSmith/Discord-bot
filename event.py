@@ -1,6 +1,7 @@
 from discord.ext import commands
 import sqlite3
 
+
 class Event(commands.Cog):
 
     @commands.Cog.listener()
@@ -18,12 +19,11 @@ class Event(commands.Cog):
         )''')
         print("Bot Online.")
 
-
     @commands.Cog.listener()
     async def on_message(self, message):
         if message.author.bot:
             return
-        
+
         author = message.author
         db = sqlite3.connect("main.sqlite")
         cursor = db.cursor()

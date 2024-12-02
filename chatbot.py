@@ -5,7 +5,8 @@ import os
 from dotenv import load_dotenv
 
 load_dotenv()
-apikey=os.environ['GPT']
+apikey = os.environ['GPT']
+
 
 class Chatbot(commands.Cog):
 
@@ -13,10 +14,10 @@ class Chatbot(commands.Cog):
         self.bot = bot
 
     @commands.command(name="chat", help="Responds to a prompt entered by the user.")
-    async def chat(self, ctx: commands.Context, *, prompt:str):
+    async def chat(self, ctx: commands.Context, *, prompt: str):
         try:
             async with aiohttp.ClientSession() as session:
-                payload= {
+                payload = {
                     "model": "gpt-3.5-turbo",
                     "messages": [{"role": "user", "content": prompt}],
                     "temperature": 0.5,
@@ -25,12 +26,15 @@ class Chatbot(commands.Cog):
                     "frequency_penalty": 0
                 }
                 headers = {"Authorization": f"Bearer {apikey}"}
-                async with session.post("https://api.openai.com/v1/chat/completions", json=payload, headers=headers) as resp:
+                async with session.post("https://api.openai.com/v1/chat/completions", json=payload,
+                                        headers=headers) as resp:
                     response = await resp.json()
-                    embed = discord.Embed(title="Chat GPT's Response:", description=response["choices"][0]["message"]["content"])
+                    embed = discord.Embed(title="Chat GPT's Response:",
+                                          description=response["choices"][0]["message"]["content"])
                     await ctx.send(embed=embed)
         except Exception as e:
             print(e)
+
 
 async def setup(bot):
     await bot.add_cog(Chatbot(bot))
