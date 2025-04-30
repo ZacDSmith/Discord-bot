@@ -1,2 +1,4 @@
 .env
 .pyc
+time.json
+.idea/workspace.xml
