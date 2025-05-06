@@ -21,7 +21,7 @@ event.py
     When a user types in chat for the first time, they are rewarded 100 currency
     
 
-music.py
+music.py (Discontinued)
 
     YOU HAVE TO DOWNLOAD THE ffmpeg.exe AND CHANGE THE FILE PATH TO YOURS
         check docs/download links to find the url
