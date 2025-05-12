@@ -3,6 +3,8 @@ COMMANDS ARE NOT CASE SENSITIVE
 Make sure to set up a .env file with the Token(Discord) and api key(Chatgpt). Check example.env for setup
 Pytube breaks sometimes, be very aware of that if you decide to use this. Youtube updates the Regex all the time
 
+I plan on redesigning this entire bot onto a slash command bot. Currently already have the music side working wtih a new library that doesn't have the same issues pytube has.
+
 docs / download links:
 
     https://discordpy.readthedocs.io/en/stable/
